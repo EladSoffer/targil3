@@ -8,11 +8,6 @@ import React, { useState } from 'react';
 function Register({setUser,user, init}) {
 
   const [image, setimage] = useState({})
-  if (init === 0) {
-    // Redirect to home page if curuser is not available
-    window.location.href = '/';
-    return null;
-  }
   return (
     <>
     <title>Friends Registration</title>

@@ -9,7 +9,10 @@ import MesArr from '../mesarr/MesArr';
 
 
 
-function Chat({ curuser, setcuruser, user, init }) {
+
+function Chat({ curuser, setcuruser, user,token }) {
+  console.log(token);
+  
 
   const [curContact, setcurContact] = useState({
     name: '',
@@ -17,11 +20,6 @@ function Chat({ curuser, setcuruser, user, init }) {
     messages: []
   });
 
-  if (init === 0) {
-    // Redirect to home page if curuser is not available
-    window.location.href = '/';
-    return null;
-  }
    // Initialize user state as an empty array
   return (
 <>
