@@ -5,9 +5,10 @@ import Imageinput from '../imageinput/Imageinput';
 import { Link } from 'react-router-dom';
 import React, { useState } from 'react';
 
-function Register({setUser,user, init}) {
+function Register({setUser,user}) {
 
   const [image, setimage] = useState({})
+
   return (
     <>
     <title>Friends Registration</title>

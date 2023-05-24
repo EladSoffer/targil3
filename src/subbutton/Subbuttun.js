@@ -1,13 +1,14 @@
 import React, { useState, useEffect } from 'react';
-import { useNavigate } from "react-router-dom";
 
+
+import { useNavigate } from "react-router-dom";
 
 function Subbutton(props) {
   const [error, setError] = useState(null); // state to store error message
   const navigate = useNavigate();
 
   function handleClient(event) {
-    
+
     event.preventDefault();
 
     const form = event.target.form;
@@ -54,6 +55,7 @@ function Subbutton(props) {
                  if(res.status === 409){
                       setError('This username allready exist');
                  } else{
+
                   
                   navigate("/");
                  }
@@ -82,6 +84,7 @@ function Subbutton(props) {
                 setError('Incorrect username or password');
               } else{
                 const token = await res.text();
+
                 props.settoken({name:logname.value, token:token});
                 navigate("/Chat");
               }

@@ -4,16 +4,43 @@ import ContactArr from '../contactarr/ContactArr';
 import Modal from '../modal/Modal';
 import Logoutbtn from '../logoutbtn/Logoutbtn';
 import Send from '../send/Send';
-import React, {  useState } from 'react';
+import React, {  useEffect, useState } from 'react';
 import MesArr from '../mesarr/MesArr';
 
 
 
 
 function Chat({ curuser, setcuruser, user,token }) {
-  console.log(token);
+  const getCuruser= async()=> {
+    const res = await fetch(`http://localhost:5000/api/Users/${token.name}`, {
+      method: 'GET', // Use 'GET' instead of 'Get'
+      headers: {
+        authorization: `Bearer ${token.token}`, // Use backticks for string interpolation
+        'Content-Type': 'application/json',
+      },
+    });
   
+    if (res.status === 401) {
+      // Handle the unauthorized response
+    } else {
+      const userData = await res.json(); // Parse the response JSON
+        const displayName = userData.displayName;
+        const profilePic = userData.profilePic;
+        const user = {
+          name: token.name,
+          displayName: displayName,
+          profilePic: profilePic
+        };
+        setcuruser(user);
+       }
+  }
+  // getCuruser();
+  console.log(curuser);
 
+  console.log(curuser.profilePic);
+useEffect(()=>{
+  getCuruser()
+},[token])
   const [curContact, setcurContact] = useState({
     name: '',
     picture: '',
@@ -34,11 +61,11 @@ function Chat({ curuser, setcuruser, user,token }) {
       <div className="col-md-5 padd">
         <div className="list-group">
           <a
-            
+            href="#"
             id="myInfo"
             className="list-group-item-action d-flex align-items-center me"
           >
-            <img src={curuser.picture} id='userpic' alt=''/>
+            <img src={curuser.profilePic} id='userpic' alt=''/>
             <span className="ml-2">{curuser.displayName}</span>
             <span className="ml-auto">
             
