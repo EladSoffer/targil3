@@ -36,11 +36,15 @@ function Chat({ curuser, setcuruser, user,token }) {
   }
   // getCuruser();
   console.log(curuser);
+  useEffect(() => {
+    const fetchData = async () => {
+      await getCuruser();
+    };
+  
+    fetchData();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
-  console.log(curuser.profilePic);
-useEffect(()=>{
-  getCuruser()
-},[token])
   const [curContact, setcurContact] = useState({
     name: '',
     picture: '',
@@ -60,8 +64,7 @@ useEffect(()=>{
       
       <div className="col-md-5 padd">
         <div className="list-group">
-          <a
-            href="#"
+          <div
             id="myInfo"
             className="list-group-item-action d-flex align-items-center me"
           >
@@ -72,13 +75,13 @@ useEffect(()=>{
               <Modal setcuruser={setcuruser}  user={user} curuser={curuser} setcurContact={setcurContact}/>
 
             </span>
-          </a>
+          </div>
           <ContactArr curuser={curuser} setcurser={setcuruser} setcurContact={setcurContact} curContact={curContact} user={user}/>
 
         </div>
       </div>
       <div className="col-md-7 padd ">
-        <a
+        <div
           
           id="chatInfo"
           className="list-group-item list-group-item-action d-flex align-items-center me"
@@ -88,7 +91,7 @@ useEffect(()=>{
         {curContact.picture && <img src={curContact.picture} className='curcontact' alt=''/>}
 
           <span className="ml-2">{curContact.name}</span>
-        </a> 
+        </div> 
           
         <MesArr curuser={curuser} curContact={curContact} />
         <div className="input-group mt-auto ">
