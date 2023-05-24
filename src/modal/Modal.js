@@ -2,48 +2,55 @@
 import Profile from '../images/profile.png';
 import React, { useState } from 'react';
 
-function Modal({setcuruser, user, curuser ,setcurContact}) {
+function Modal({ contacts, setcontacts, setcurContact, token }) {
   const [error, setError] = useState(null);
-  function handleAddClick(event){
+  function handleAddClick(event) {
 
     const inputEl = document.getElementById('newname');
     const inputValue = inputEl.value;
-    const userNames = user.map(u => u.name);
-    if (!userNames.includes(inputValue)) {
-      setError('Contact ID does not match any user.');
-    }
-    else {
-      const contactNames = curuser.contacts.map(c => c.name);
-      if (contactNames.includes(inputValue)) {
-        setError('This user is already a contact.');
-      }else{
-        const curcontucts= curuser.contacts;
-        if(curcontucts.includes(inputValue)){
-          setError('This user is already a contact.');
-          return;
-        }
-        const temp = { ...curuser };
-        temp.contacts.push({ name: inputValue, messages: [] });
-        setcuruser(temp);
-        document.getElementById('newname').value = '';
-        setError(null);
-        document.getElementById('exampleModal').classList.remove('show');
-        document.body.classList.remove('modal-open');
-        document.querySelector('.modal-backdrop').remove();
-        const tempCon = user.find(usera => usera.name === inputValue);
-        const finaluser={
-          name:tempCon.name,
-          picture:tempCon.picture
-        };
 
-        setcurContact(finaluser);
+    async function friends() {
+      const data = {
+        "username": inputValue
       }
-      
+      const res = await fetch('http://localhost:5000/api/Chats', {
+        'method': 'post', // send a post request
+        'headers': {
+          'authorization': `Bearer ${token.token}`, // Use backticks for string interpolation
+          'Content-Type': 'application/json', // the data (username/password) is in the form of a JSON object
+        },
+        'body': JSON.stringify(data) // The actual data (username/password)
+      })
+      if (res.status === 400) {
+        setError('Contact ID does not match any user.');
+      } else {
+        console.log("ffff");
+        const temp = [...contacts];
+        const newContact = await res.json(); // Call res.json() to parse the response
+        temp.push(newContact);
+        setcontacts(temp);
+        setcurContact(newContact);
+      }
     }
-    
-    
-
+    friends();
+    console.log("AFTERffff");
+    document.getElementById('newname').value = '';
+    setError(null);
+    document.getElementById('exampleModal').classList.remove('show');
+    document.body.classList.remove('modal-open');
+    document.querySelector('.modal-backdrop').remove();
+    // const tempCon = contacts.user.find(usera => usera.username === inputValue);
+    // const finaluser = {
+    //   name: tempCon.user.username,
+    //   picture: tempCon.user.profilePic
+    // };
+    // setcurContact(finaluser);
   }
+
+
+
+
+
   return (
     <>
       <button
@@ -72,7 +79,7 @@ function Modal({setcuruser, user, curuser ,setcurContact}) {
               <h5 className="modal-title" id="exampleModalLabel">
                 Add new contact
               </h5>
- 
+
             </div>
             <div className="modal-body">
               <center>
@@ -82,7 +89,7 @@ function Modal({setcuruser, user, curuser ,setcurContact}) {
                   name="name"
                   placeholder="Contact ID"
                 />
-                 {error && <div className="text-danger">{error}</div>} 
+                {error && <div className="text-danger">{error}</div>}
               </center>
             </div>
             <div className="modal-footer">
@@ -101,12 +108,12 @@ function Modal({setcuruser, user, curuser ,setcurContact}) {
                 </button>
               </div>
               <br></br>
-             
+
             </div>
           </div>
         </div>
       </div>
-      
+
     </>
   );
 }

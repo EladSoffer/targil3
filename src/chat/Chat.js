@@ -35,8 +35,8 @@ function Chat({ curuser, setcuruser, user,token }) {
         setcuruser(user);
        }
   }
-  // getCuruser();
-  console.log(curuser);
+
+
   useEffect(() => {
     const fetchData = async () => {
       await getCuruser();
@@ -63,7 +63,7 @@ function Chat({ curuser, setcuruser, user,token }) {
     })
     const data = await res.json(); // Parse the response JSON
     setcontacts(data);
-    console.log(res.status);
+    
   }
 
   useEffect(()=>{
@@ -74,7 +74,6 @@ function Chat({ curuser, setcuruser, user,token }) {
     fetchdata();
   },[])
 
-  console.log(contacts);
 
    // Initialize user state as an empty array
   return (
@@ -97,7 +96,7 @@ function Chat({ curuser, setcuruser, user,token }) {
             <span className="ml-2">{curuser.displayName}</span>
             <span className="ml-auto">
             
-              <Modal setcuruser={setcuruser}  user={user} curuser={curuser} setcurContact={setcurContact}/>
+              <Modal contacts={contacts} setcontacts={setcontacts} setcurContact={setcurContact} token={token}/>
 
             </span>
           </div>
