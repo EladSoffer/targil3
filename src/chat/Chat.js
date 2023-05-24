@@ -37,11 +37,15 @@ function Chat({ curuser, setcuruser, user,token }) {
   }
   // getCuruser();
   console.log(curuser);
+  useEffect(() => {
+    const fetchData = async () => {
+      await getCuruser();
+    };
+  
+    fetchData();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
-  console.log(curuser.profilePic);
-useEffect(()=>{
-  getCuruser()
-},[token])
   const [curContact, setcurContact] = useState({
     name: '',
     picture: '',
@@ -86,7 +90,6 @@ useEffect(()=>{
       <div className="col-md-5 padd">
         <div className="list-group">
           <div
-            
             id="myInfo"
             className="list-group-item-action d-flex align-items-center me"
           >
@@ -98,7 +101,9 @@ useEffect(()=>{
 
             </span>
           </div>
+
           <ContactArr contacts={contacts} setcurContact={setcurContact} curContact={curContact} user={user}/>
+
 
         </div>
       </div>

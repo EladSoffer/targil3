@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 
 
 import { useNavigate } from "react-router-dom";
@@ -18,7 +18,6 @@ function Subbutton(props) {
       const passwordInput = document.getElementById('password');
       const confirmPasswordInput = document.getElementById('confirm-password');
       const displayNameInput = document.getElementById('display-name');
-      const picture = document.getElementById('picture');
       const name = document.getElementById('name');
       const logname = document.getElementById('logname');
       const logpass = document.getElementById('logpassword');
@@ -64,7 +63,7 @@ function Subbutton(props) {
 
         }
       } else {
-        {/* LOGIN*/ }
+        
         setError(null); // clear the error
         // continue with form submission
         async function logg(){
