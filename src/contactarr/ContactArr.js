@@ -6,7 +6,6 @@ import React, { useRef, useEffect } from 'react';
 function contactArr({ contacts, setcurContact,curContact, user }) { 
 
 
-
   if (!contacts || contacts.length === 0) {
     
     return null;
