@@ -2,7 +2,7 @@
 import Profile from '../images/profile.png';
 import React, { useState } from 'react';
 
-function Modal({ contacts, setcontacts, user, setcurContact, token }) {
+function Modal({ contacts, setcontacts, setcurContact, token }) {
   const [error, setError] = useState(null);
   function handleAddClick(event) {
 
@@ -24,13 +24,16 @@ function Modal({ contacts, setcontacts, user, setcurContact, token }) {
       if (res.status === 400) {
         setError('Contact ID does not match any user.');
       } else {
-        const temp = { ...contacts };
-        const newContact = res.json;
-        temp.push({ newContact });
+        console.log("ffff");
+        const temp = [...contacts];
+        const newContact = await res.json(); // Call res.json() to parse the response
+        temp.push(newContact);
         setcontacts(temp);
+        setcurContact(newContact);
       }
     }
     friends();
+    console.log("AFTERffff");
     document.getElementById('newname').value = '';
     setError(null);
     document.getElementById('exampleModal').classList.remove('show');
@@ -48,70 +51,70 @@ function Modal({ contacts, setcontacts, user, setcurContact, token }) {
 
 
 
-return (
-  <>
-    <button
-      type="button"
-      className="btn btn-link p-0"
-      data-bs-toggle="modal"
-      data-bs-target="#exampleModal"
-    >
-      <img
-        src={Profile}
-        alt="prof"
-        width="15px"
-        className="icon"
-      />
-    </button>
-    <div
-      className="modal fade"
-      id="exampleModal"
-      tabIndex={-1}
-      aria-labelledby="exampleModalLabel"
-      aria-hidden="true"
-    >
-      <div className="modal-dialog">
-        <div className="modal-content">
-          <div className="modal-header">
-            <h5 className="modal-title" id="exampleModalLabel">
-              Add new contact
-            </h5>
+  return (
+    <>
+      <button
+        type="button"
+        className="btn btn-link p-0"
+        data-bs-toggle="modal"
+        data-bs-target="#exampleModal"
+      >
+        <img
+          src={Profile}
+          alt="prof"
+          width="15px"
+          className="icon"
+        />
+      </button>
+      <div
+        className="modal fade"
+        id="exampleModal"
+        tabIndex={-1}
+        aria-labelledby="exampleModalLabel"
+        aria-hidden="true"
+      >
+        <div className="modal-dialog">
+          <div className="modal-content">
+            <div className="modal-header">
+              <h5 className="modal-title" id="exampleModalLabel">
+                Add new contact
+              </h5>
 
-          </div>
-          <div className="modal-body">
-            <center>
-              <input
-                type="text"
-                id="newname"
-                name="name"
-                placeholder="Contact ID"
-              />
-              {error && <div className="text-danger">{error}</div>}
-            </center>
-          </div>
-          <div className="modal-footer">
-            <div className="col-md-6">
-              <button
-                type="button"
-                className="btn btn-danger"
-                data-bs-dismiss="modal"
-              >
-                Cancel
-              </button>
             </div>
-            <div className="col-md-6 text-right">
-              <button type="button" className="btn btn-success" onClick={handleAddClick}>
-                Add
-              </button>
+            <div className="modal-body">
+              <center>
+                <input
+                  type="text"
+                  id="newname"
+                  name="name"
+                  placeholder="Contact ID"
+                />
+                {error && <div className="text-danger">{error}</div>}
+              </center>
             </div>
-            <br></br>
+            <div className="modal-footer">
+              <div className="col-md-6">
+                <button
+                  type="button"
+                  className="btn btn-danger"
+                  data-bs-dismiss="modal"
+                >
+                  Cancel
+                </button>
+              </div>
+              <div className="col-md-6 text-right">
+                <button type="button" className="btn btn-success" onClick={handleAddClick}>
+                  Add
+                </button>
+              </div>
+              <br></br>
 
+            </div>
           </div>
         </div>
       </div>
-    </div>
 
-  </>
-);
+    </>
+  );
 }
 export default Modal;
