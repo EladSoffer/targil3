@@ -8,7 +8,7 @@ import React, {  useEffect, useState } from 'react';
 import MesArr from '../mesarr/MesArr';
 
 
-
+//YUVAL
 
 function Chat({ curuser, setcuruser, user,token }) {
   const [contacts, setcontacts] = useState([]);
@@ -36,6 +36,8 @@ function Chat({ curuser, setcuruser, user,token }) {
        }
   }
 
+  // getCuruser();
+  console.log(curuser);
   useEffect(() => {
     const fetchData = async () => {
       await getCuruser();

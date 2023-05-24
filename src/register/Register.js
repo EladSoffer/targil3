@@ -36,7 +36,8 @@ function Register({setUser,user}) {
 
               <div className="row">
                 <div className="ol-6 mx-auto text-center">
-                  <img                 
+                  <img    
+                    alt=''            
                     id="friendspic"                  
                     className="img-responsive center-block"
                   />
