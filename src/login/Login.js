@@ -6,11 +6,8 @@ import { Link } from 'react-router-dom';
 import React, { useEffect } from 'react';
 
 
-function Login({setcuruser, user, setinit}) {
+function Login({setcuruser, user, settoken}) {
 
-  useEffect(() => {
-    setinit(1);
-  }, []);
   
   return (
 <>
@@ -40,7 +37,7 @@ function Login({setcuruser, user, setinit}) {
             <Inputfield itype = "text" id="logname" iplaceholder="Enter name" ilabel = "Username" iicon = "glyphicon glyphicon-user" />
             <Inputfield itype = "password" id="logpassword" iplaceholder="Enter password" ilabel = "Password" iicon = "glyphicon glyphicon-lock" />
             <br/>
-            <Subbutton itype = "Login" setcuruser={setcuruser} user={user}/>
+            <Subbutton itype = "Login" setcuruser={setcuruser} user={user} settoken={settoken}/>
             <center>
               <p>
                 Not registered?  <Link to="/Register"><span>Click here</span></Link> to

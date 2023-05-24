@@ -14,15 +14,16 @@ const App = () => {
   const [curuser, setcuruser] = useState({}); // initial value is an empty object
 
   const [init, setinit] = useState(0);
+  const [token, settoken] = useState({});
 
 
   return (
     <BrowserRouter>
       <Routes>
 
-        <Route path="/" element={<Login setcuruser={setcuruser} user={user} setinit={setinit}/>} />
+        <Route path="/" element={<Login setcuruser={setcuruser} user={user} setinit={setinit} settoken={settoken} />} />
         <Route path="/Register" element={<Register setUser={setUser} user={user} init={init}/>} />
-        <Route path="/Chat" element={<Chat curuser ={curuser} setcuruser={setcuruser} user={user} init={init}/>} />
+        <Route path="/Chat" element={<Chat curuser ={curuser} setcuruser={setcuruser} user={user} init={init} token={token}/>} />
 
       </Routes>
     </BrowserRouter>
