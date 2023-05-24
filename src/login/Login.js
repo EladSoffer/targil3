@@ -8,7 +8,6 @@ import React, { useEffect } from 'react';
 
 function Login({setcuruser, user, settoken}) {
 
-  
   return (
 <>
 {/* 

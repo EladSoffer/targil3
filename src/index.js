@@ -12,16 +12,15 @@ import Register from './register/Register';
 const App = () => {
   const [user, setUser] = useState([]); // Initialize user state as an empty array
   const [curuser, setcuruser] = useState({}); // initial value is an empty object
-
+  const [token,settoken] = useState();
   const [init, setinit] = useState(0);
-  const [token, settoken] = useState({});
 
 
   return (
     <BrowserRouter>
       <Routes>
 
-        <Route path="/" element={<Login setcuruser={setcuruser} user={user} setinit={setinit} settoken={settoken} />} />
+        <Route path="/" element={<Login setcuruser={setcuruser} user={user} setinit={setinit} settoken={settoken}/>} />
         <Route path="/Register" element={<Register setUser={setUser} user={user} init={init}/>} />
         <Route path="/Chat" element={<Chat curuser ={curuser} setcuruser={setcuruser} user={user} init={init} token={token}/>} />
 
