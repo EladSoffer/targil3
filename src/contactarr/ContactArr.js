@@ -3,28 +3,29 @@ import React, { useRef, useEffect } from 'react';
 
 
 
-function contactArr({ curuser, setcurser, setcurContact,curContact, user }) { 
+function contactArr({ contacts, setcurContact,curContact, user }) { 
 
 
 
-  if (!curuser || !curuser.contacts || curuser.contacts.length === 0) {
+  if (!contacts || contacts.length === 0) {
     
     return null;
   }
   
 
-  const contactComponents = curuser.contacts.map((contact, index) => (
+  const contactComponents = contacts.map((contact, index) => (
 
     <Chatslist
       key={index}
-      iname={contact.name} 
+      iname={contact.user.username} 
       itime="10/11/2023 12:33" 
       iicon="user-icon-male"
-      curuser={curuser}
-      setcuruser={setcurser}
+      contact={contact}
+      //setcuruser={setcurser}
       setcurContact={setcurContact}
       curContact={curContact}
       user={user}
+      contacts={contacts}
     />
     
   ));

@@ -11,6 +11,7 @@ import MesArr from '../mesarr/MesArr';
 
 
 function Chat({ curuser, setcuruser, user,token }) {
+  const [contacts, setcontacts] = useState([]);
   const getCuruser= async()=> {
     const res = await fetch(`http://localhost:5000/api/Users/${token.name}`, {
       method: 'GET', // Use 'GET' instead of 'Get'
@@ -47,6 +48,30 @@ useEffect(()=>{
     messages: []
   });
 
+  const friendChat = async()=> {
+    const res = await fetch('http://localhost:5000/api/Chats', {
+      'method': 'Get', // send a post request
+      'headers': {
+        authorization: `Bearer ${token.token}`, // Use backticks for string interpolation
+        'Content-Type': 'application/json', // the data (username/password) is in the form of a JSON object
+      },
+
+    })
+    const data = await res.json(); // Parse the response JSON
+    setcontacts(data);
+    console.log(res.status);
+  }
+
+  useEffect(()=>{
+    friendChat()
+    const fetchdata = async ()=> {
+      await friendChat();
+    };
+    fetchdata();
+  },[])
+
+  console.log(contacts);
+
    // Initialize user state as an empty array
   return (
 <>
@@ -60,8 +85,8 @@ useEffect(()=>{
       
       <div className="col-md-5 padd">
         <div className="list-group">
-          <a
-            href="#"
+          <div
+            
             id="myInfo"
             className="list-group-item-action d-flex align-items-center me"
           >
@@ -72,13 +97,13 @@ useEffect(()=>{
               <Modal setcuruser={setcuruser}  user={user} curuser={curuser} setcurContact={setcurContact}/>
 
             </span>
-          </a>
-          <ContactArr curuser={curuser} setcurser={setcuruser} setcurContact={setcurContact} curContact={curContact} user={user}/>
+          </div>
+          <ContactArr contacts={contacts} setcurContact={setcurContact} curContact={curContact} user={user}/>
 
         </div>
       </div>
       <div className="col-md-7 padd ">
-        <a
+        <div
           
           id="chatInfo"
           className="list-group-item list-group-item-action d-flex align-items-center me"
@@ -88,7 +113,7 @@ useEffect(()=>{
         {curContact.picture && <img src={curContact.picture} className='curcontact' alt=''/>}
 
           <span className="ml-2">{curContact.name}</span>
-        </a> 
+        </div> 
           
         <MesArr curuser={curuser} curContact={curContact} />
         <div className="input-group mt-auto ">
