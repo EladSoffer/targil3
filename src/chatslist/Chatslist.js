@@ -1,11 +1,11 @@
 import { useState,useEffect } from 'react';
 
-function Chatslist({ iname, itime, iicon, iclass, curuser, setcuruser, setcurContact,curContact, user }) {
+function Chatslist({ iname, itime, iicon, iclass, contact, setcurContact,curContact, user, contacts }) {
   const [isSelected, setIsSelected] = useState(false);
 
   function handleClick(event) {
     event.preventDefault();
-    const temp = user.find(usera => usera.name === iname);
+    const temp = contacts.find(usera => usera.user.username === iname);
     setcurContact(temp);
     setIsSelected(true);
   }
@@ -24,10 +24,6 @@ function Chatslist({ iname, itime, iicon, iclass, curuser, setcuruser, setcurCon
     updateSelectedStatus();
   }, [curContact]);
 
-  const tempUs = user.find(usera => usera.name === iname);
-  const print = curuser.contacts.find(i => i.name == iname);
-  const lastMessage = print.messages[print.messages.length - 1];
-
 
   return (
     <a
@@ -35,14 +31,14 @@ function Chatslist({ iname, itime, iicon, iclass, curuser, setcuruser, setcurCon
     className={`list-group-item list-group-item-action d-flex align-items-center contactss ${isSelected ? 'active' : ''}`}
     onClick={handleClick}
   >
-    <img src={tempUs.picture} className='curcontact'/>
+    <img src={contact.user.profilePic} className='curcontact'/>
     
       <span className={`chatcontacts `}>{iname}</span>
-      {lastMessage && (
-        <div className='lastmss'>{lastMessage.content}</div>
+      {contact.lastMessage && (
+        <div className='lastmss'>{contact.lastMessage.content}</div>
       )}
-      {lastMessage && (
-        <span className='ml-auto'><time  dateTime="YYYY-MM-DDTHH:MM:SS">{lastMessage.time}</time></span>
+      {contact.lastMessage && (
+        <span className='ml-auto'><time  dateTime="YYYY-MM-DDTHH:MM:SS">{contact.lastMessage.time}</time></span>
       )}
 
     
