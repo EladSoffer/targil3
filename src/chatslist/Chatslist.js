@@ -12,6 +12,11 @@ function Chatslist({ iname, itime, iicon, iclass, contact, setcurContact,curCont
 
   // Update isSelected state of other components
   function updateSelectedStatus() {
+    if (!curContact || Object.keys(curContact).length === 0){
+      console.log("aaaa")
+      return null
+    }
+    console.log(curContact)
     if (curContact.user.username === iname) {
       setIsSelected(true);
     } else {
