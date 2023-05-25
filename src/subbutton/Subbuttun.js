@@ -33,7 +33,6 @@ function Subbutton(props) {
           event.preventDefault();
         } else {
           setError(null); // clear the error
-          setError('This username allready exist');
             //send the server new user
             async function regist() {
               const data = {

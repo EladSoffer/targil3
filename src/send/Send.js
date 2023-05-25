@@ -1,7 +1,7 @@
 import React, { useState,useEffect } from 'react';
 
 
-function Message({curuser, setcuruser, curContact, setuser}) {
+function Message({curuser, setcuruser, curContact, setuser, token}) {
 
 
   function sendMessage() {
@@ -15,6 +15,8 @@ function Message({curuser, setcuruser, curContact, setuser}) {
       content: mes,
       time: time
     };
+    
+
     
     const userMes = {...curuser};
 
