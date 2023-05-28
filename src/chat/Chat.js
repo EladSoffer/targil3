@@ -78,7 +78,7 @@ function Chat({ curuser, setcuruser, user, token }) {
 
 
   // Initialize user state as an empty array
-  return (
+  return ( 
     <>
       <title>Friends</title>
       <center>
