@@ -16,6 +16,7 @@ function Message({curuser, setcuruser, curContact, setuser, token}) {
       time: time
     };
     
+    
 
     
     const userMes = {...curuser};

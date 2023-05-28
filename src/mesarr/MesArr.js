@@ -11,7 +11,7 @@ function MesArr({ curuser, curContact, contacts, messages, setmessages, token })
 
     const getChatsId = async () => {
       try {
-        const res = await fetch(`http://localhost:5000/api/Chats/${curContact.id}`, {
+        const res = await fetch(`http://localhost:5000/api/Chats/${curContact.id}/Messages`, {
           method: 'GET',
           headers: {
             authorization: `Bearer ${token.token}`,
@@ -19,8 +19,7 @@ function MesArr({ curuser, curContact, contacts, messages, setmessages, token })
           },
         });
         if (res.status === 200) {
-          const chatId = await res.json();
-          const temp = chatId.messages;
+          const temp = await res.json();
           setmessages(temp);
         }
       } catch (error) {
