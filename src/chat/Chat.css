@@ -431,6 +431,12 @@ time[datetime] {
   overflow-y: scroll;
 }
 
+.contacts-container {
+  max-height: calc(69vh - 66px); /* Adjusted value based on viewport height */
+  overflow-y: scroll;
+  overflow-x: hidden;
+}
+
 
 
 

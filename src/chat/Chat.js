@@ -70,7 +70,7 @@ function Chat({ curuser, setcuruser, user, token }) {
       await friendChat();
     };
     fetchdata();
-  }, [])
+  }, [mesFlag])
 
 
   // Initialize user state as an empty array
