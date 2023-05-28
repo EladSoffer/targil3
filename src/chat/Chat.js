@@ -47,11 +47,7 @@ function Chat({ curuser, setcuruser, user, token }) {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
-  const [curContact, setcurContact] = useState({
-    name: '',
-    picture: '',
-    messages: []
-  });
+  const [curContact, setcurContact] = useState({});
 
   const friendChat = async () => {
     const res = await fetch('http://localhost:5000/api/Chats', {

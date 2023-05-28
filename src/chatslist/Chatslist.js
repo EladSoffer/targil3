@@ -12,9 +12,11 @@ function Chatslist({ iname, itime, iicon, iclass, contact, setcurContact,curCont
 
   // Update isSelected state of other components
   function updateSelectedStatus() {
+
     if(!curContact || !curContact.user || curContact.user.length === 0 ){
       return null;
     }
+
     if (curContact.user.username === iname) {
       setIsSelected(true);
     } else {
