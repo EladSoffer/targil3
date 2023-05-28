@@ -24,7 +24,6 @@ function Modal({ contacts, setcontacts, setcurContact, token }) {
       if (res.status === 400) {
         setError('Contact ID does not match any user.');
       } else {
-        console.log("ffff");
         const temp = [...contacts];
         const newContact = await res.json(); // Call res.json() to parse the response
         temp.push(newContact);

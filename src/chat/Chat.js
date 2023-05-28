@@ -12,7 +12,8 @@ import MesArr from '../mesarr/MesArr';
 
 function Chat({ curuser, setcuruser, user, token }) {
   const [contacts, setcontacts] = useState([]);
-  const [messages, setmessages] = useState([]);  
+  const [messages, setmessages] = useState([]);
+  const [mesFlag, setmesFlag] = useState(1);
   const getCuruser = async () => {
     const res = await fetch(`http://localhost:5000/api/Users/${token.name}`, {
       method: 'GET', // Use 'GET' instead of 'Get'
@@ -73,7 +74,7 @@ function Chat({ curuser, setcuruser, user, token }) {
 
 
   // Initialize user state as an empty array
-  return (
+  return ( 
     <>
       <title>Friends</title>
       <center>
@@ -116,11 +117,11 @@ function Chat({ curuser, setcuruser, user, token }) {
               {curContact && curContact.user && curContact.user.profilePic && <span className="ml-2">{curContact.user.username}</span>}
             </div>
 
-            <MesArr curuser={curuser} curContact={curContact} contacts={contacts} messages={messages} setmessages={setmessages} token={token}/>
+            <MesArr curuser={curuser} curContact={curContact} contacts={contacts} messages={messages} setmessages={setmessages} token={token} mesFlag={mesFlag}/>
             <div className="input-group mt-auto ">
 
 
-              <Send curuser={curuser} setcuruser={setcuruser} curContact={curContact} token={token}  />
+              <Send curuser={curuser} setcuruser={setcuruser} curContact={curContact} token={token} messages={messages} setmessages={setmessages} mesFlag={mesFlag} setmesFlag={setmesFlag}/>
 
             </div>
           </div>
