@@ -54,7 +54,6 @@ function Subbutton(props) {
                       setError('This username allready exist');
                  } else{
 
-                  
                   navigate("/");
                  }
             }

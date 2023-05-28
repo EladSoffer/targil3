@@ -29,15 +29,15 @@ function Modal({ contacts, setcontacts, setcurContact, token }) {
         temp.push(newContact);
         setcontacts(temp);
         setcurContact(newContact);
+        document.getElementById('newname').value = '';
+        setError(null);
+        document.getElementById('exampleModal').classList.remove('show');
+        document.body.classList.remove('modal-open');
+        document.querySelector('.modal-backdrop').remove();
       }
     }
     friends();
-    console.log("AFTERffff");
-    document.getElementById('newname').value = '';
-    setError(null);
-    document.getElementById('exampleModal').classList.remove('show');
-    document.body.classList.remove('modal-open');
-    document.querySelector('.modal-backdrop').remove();
+
     // const tempCon = contacts.user.find(usera => usera.username === inputValue);
     // const finaluser = {
     //   name: tempCon.user.username,
