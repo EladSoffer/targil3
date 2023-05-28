@@ -31,7 +31,7 @@ function contactArr({ contacts, setcurContact,curContact, user }) {
 
   return(
 
-    <div>
+    <div className='message-container' >
         {contactComponents}
     </div>
    
