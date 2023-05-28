@@ -1,7 +1,7 @@
 import Message from "../message/Message";
 import React, { useRef, useEffect } from 'react';
 
-function MesArr({ curuser, curContact, contacts, messages, setmessages, token }) {
+function MesArr({ curuser, curContact, contacts, messages, setmessages, token, mesFlag}) {
   const containerRef = useRef(null);
 
   useEffect(() => {
@@ -11,7 +11,7 @@ function MesArr({ curuser, curContact, contacts, messages, setmessages, token })
 
     const getChatsId = async () => {
       try {
-        const res = await fetch(`http://localhost:5000/api/Chats/${curContact.id}`, {
+        const res = await fetch(`http://localhost:5000/api/Chats/${curContact.id}/Messages`, {
           method: 'GET',
           headers: {
             authorization: `Bearer ${token.token}`,
@@ -19,8 +19,7 @@ function MesArr({ curuser, curContact, contacts, messages, setmessages, token })
           },
         });
         if (res.status === 200) {
-          const chatId = await res.json();
-          const temp = chatId.messages;
+          const temp = await res.json();
           setmessages(temp);
         }
       } catch (error) {
@@ -29,7 +28,7 @@ function MesArr({ curuser, curContact, contacts, messages, setmessages, token })
     };
 
     getChatsId();
-  }, [token, curContact]);
+  }, [token, curContact, mesFlag]);
 
   useEffect(() => {
     if (containerRef.current) {
@@ -40,8 +39,10 @@ function MesArr({ curuser, curContact, contacts, messages, setmessages, token })
   if (!curuser || !curuser.name || !curContact || curContact.name === '') {
     return null;
   }
+
   console.log(messages);
-  const messageComponents = messages.map((message, index) => (
+  const reversedMessages = [...messages].reverse();
+  const messageComponents = reversedMessages.map((message, index) => (
     <Message
       key={index}
       side={`message ${message.sender.username === curuser.name ? 'user-ms ml-84' : 'friend-ms ml-auto'}`}
