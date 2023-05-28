@@ -12,9 +12,12 @@ function Chatslist({ iname, itime, iicon, iclass, contact, setcurContact,curCont
 
   // Update isSelected state of other components
   function updateSelectedStatus() {
-    if (!curContact || Object.keys(curContact).length === 0){
-      return null
+
+
+    if(!curContact || !curContact.user || curContact.user.length === 0 ){
+      return null;
     }
+
     if (curContact.user.username === iname) {
       setIsSelected(true);
     } else {
@@ -41,7 +44,7 @@ function Chatslist({ iname, itime, iicon, iclass, contact, setcurContact,curCont
         <div className='lastmss'>{contact.lastMessage.content}</div>
       )}
       {contact.lastMessage && (
-        <span className='ml-auto'><time  dateTime="YYYY-MM-DDTHH:MM:SS">{contact.lastMessage.time}</time></span>
+        <span className='ml-auto'><time  dateTime="YYYY-MM-DDTHH:MM:SS">{contact.lastMessage.created}</time></span>
       )}
 
     
