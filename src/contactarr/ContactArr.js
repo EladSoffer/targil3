@@ -11,7 +11,7 @@ function contactArr({ contacts, setcurContact,curContact, user }) {
     return null;
   }
   
-
+  console.log(contacts);
   const contactComponents = contacts.map((contact, index) => (
 
     <Chatslist
