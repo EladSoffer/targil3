@@ -1,11 +1,12 @@
 import { useState,useEffect } from 'react';
 
-function Chatslist({ iname, itime, iicon, iclass, contact, setcurContact,curContact, user, contacts }) {
+function Chatslist({ iname, itime, iicon, iclass, contact, setcurContact,curContact, user, contacts,id }) {
   const [isSelected, setIsSelected] = useState(false);
 
   function handleClick(event) {
     event.preventDefault();
-    const temp = contacts.find(usera => usera.user.username === iname);
+    const temp = contacts.find(usera => usera.id === id);
+
     setcurContact(temp);
     setIsSelected(true);
   }
@@ -18,7 +19,7 @@ function Chatslist({ iname, itime, iicon, iclass, contact, setcurContact,curCont
       return null;
     }
 
-    if (curContact.user.username === iname) {
+    if (curContact.id === id) {
       setIsSelected(true);
     } else {
       setIsSelected(false);
