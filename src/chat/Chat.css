@@ -470,6 +470,11 @@ time[datetime] {
  
 }
 
+.lastMTime {
+  float: right;
+  font-size: 0.9vh !important;
+}
+
 
 
 

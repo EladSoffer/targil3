@@ -1,11 +1,12 @@
 import { useState,useEffect } from 'react';
 
-function Chatslist({ iname, itime, iicon, iclass, contact, setcurContact,curContact, user, contacts }) {
+function Chatslist({ iname, itime, iicon, iclass, contact, setcurContact,curContact, user, contacts,id }) {
   const [isSelected, setIsSelected] = useState(false);
 
   function handleClick(event) {
     event.preventDefault();
-    const temp = contacts.find(usera => usera.user.username === iname);
+    const temp = contacts.find(usera => usera.id === id);
+
     setcurContact(temp);
     setIsSelected(true);
   }
@@ -13,11 +14,12 @@ function Chatslist({ iname, itime, iicon, iclass, contact, setcurContact,curCont
   // Update isSelected state of other components
   function updateSelectedStatus() {
 
+
     if(!curContact || !curContact.user || curContact.user.length === 0 ){
       return null;
     }
 
-    if (curContact.user.username === iname) {
+    if (curContact.id === id) {
       setIsSelected(true);
     } else {
       setIsSelected(false);
@@ -28,6 +30,17 @@ function Chatslist({ iname, itime, iicon, iclass, contact, setcurContact,curCont
   useEffect(() => {
     updateSelectedStatus();
   }, [curContact]);
+
+  function isToday(timestamp) {
+    const today = new Date();
+    const providedDate = new Date(timestamp);
+  
+    return (
+      today.getDate() === providedDate.getDate() &&
+      today.getMonth() === providedDate.getMonth() &&
+      today.getFullYear() === providedDate.getFullYear()
+    );
+  }
 
 
   return (
@@ -43,7 +56,9 @@ function Chatslist({ iname, itime, iicon, iclass, contact, setcurContact,curCont
         <div className='lastmss'>{contact.lastMessage.content}</div>
       )}
       {contact.lastMessage && (
-        <span className='ml-auto'><time  dateTime="YYYY-MM-DDTHH:MM:SS">{contact.lastMessage.created}</time></span>
+        <span className='ml-auto'><time className='lastMTime'  dateTime="YYYY-MM-DDTHH:MM:SS">{isToday(contact.lastMessage.created)
+          ? new Date(contact.lastMessage.created).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })
+          : new Date(contact.lastMessage.created).toLocaleDateString()}</time></span>
       )}
 
     

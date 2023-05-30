@@ -37,13 +37,6 @@ function Modal({ contacts, setcontacts, setcurContact, token }) {
       }
     }
     friends();
-
-    // const tempCon = contacts.user.find(usera => usera.username === inputValue);
-    // const finaluser = {
-    //   name: tempCon.user.username,
-    //   picture: tempCon.user.profilePic
-    // };
-    // setcurContact(finaluser);
   }
 
 
