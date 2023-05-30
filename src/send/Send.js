@@ -16,6 +16,7 @@ function Message({curuser, setcuruser, curContact, setuser, token, messages, set
       time: time
     };
     
+
     async function friends() {
       const data = {
         "msg": mes
