@@ -30,6 +30,16 @@ function Chatslist({ iname, itime, iicon, iclass, contact, setcurContact,curCont
     updateSelectedStatus();
   }, [curContact]);
 
+  function isToday(timestamp) {
+    const today = new Date();
+    const providedDate = new Date(timestamp);
+  
+    return (
+      today.getDate() === providedDate.getDate() &&
+      today.getMonth() === providedDate.getMonth() &&
+      today.getFullYear() === providedDate.getFullYear()
+    );
+  }
 
 
   return (
@@ -45,7 +55,9 @@ function Chatslist({ iname, itime, iicon, iclass, contact, setcurContact,curCont
         <div className='lastmss'>{contact.lastMessage.content}</div>
       )}
       {contact.lastMessage && (
-        <span className='ml-auto'><time  dateTime="YYYY-MM-DDTHH:MM:SS">{contact.lastMessage.created}</time></span>
+        <span className='ml-auto'><time className='lastMTime'  dateTime="YYYY-MM-DDTHH:MM:SS">{isToday(contact.lastMessage.created)
+          ? new Date(contact.lastMessage.created).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })
+          : new Date(contact.lastMessage.created).toLocaleDateString()}</time></span>
       )}
 
     
