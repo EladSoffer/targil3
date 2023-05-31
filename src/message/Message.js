@@ -17,18 +17,21 @@ function Message({ side, content, time, color }) {
 
   return (
     <div className="d-flex flex-row justify-content-start mb-4 mr-8 ms">
-      <div
-        className={`p-3 text-white ${side}`}
-        style={{
-          borderRadius: 15,
-          display: "inline-block",
-          backgroundColor: color
-        }}
-      >
-        <p className="small mb-0">{content}</p>
-        <p className="small mb-0 mesTime">{formattedTime}</p>
-      </div>
-    </div>
+  <div
+    className={`p-3 text-white ${side}`}
+    style={{
+      borderRadius: 15,
+      display: "inline-block",
+      backgroundColor: color,
+      wordWrap: "break-word", // Enable word wrapping
+      overflow: "hidden", // Hide content that exceeds the container's dimensions
+      maxWidth: "50%" // Ensure the content does not exceed the width of the container
+    }}
+  >
+    <p className="small mb-0">{content}</p>
+    <p className="small mb-0 mesTime">{formattedTime}</p>
+  </div>
+</div>
   );
 }
 
