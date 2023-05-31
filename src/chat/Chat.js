@@ -111,10 +111,15 @@ function Chat({ curuser, setcuruser, user, token }) {
               className="list-group-item list-group-item-action d-flex align-items-center me"
             >
 
-
+              
               {curContact && curContact.user && curContact.user.profilePic && <img src={curContact.user.profilePic} className='curcontact' alt='' />}
 
               {curContact && curContact.user && curContact.user.profilePic && <span className="ml-2">{curContact.user.username}</span>}
+              {curContact && curContact.user && curContact.user.profilePic &&<div className="d-flex justify-content-end">
+  <div className="ml-auto">
+    <button className="btn btn-danger btn-sm">Delete</button>
+  </div>
+</div>}
             </div>
 
             <MesArr curuser={curuser} curContact={curContact} contacts={contacts} messages={messages} setmessages={setmessages} token={token} mesFlag={mesFlag}/>

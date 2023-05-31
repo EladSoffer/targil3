@@ -8,7 +8,6 @@ function MesArr({ curuser, curContact, contacts, messages, setmessages, token, m
     if (!curuser || !curContact || !contacts || contacts.length === 0 || curContact.name === '' || !token) {
       return;
     }
-
     const getChatsId = async () => {
       try {
         const res = await fetch(`http://localhost:5000/api/Chats/${curContact.id}/Messages`, {
@@ -19,7 +18,9 @@ function MesArr({ curuser, curContact, contacts, messages, setmessages, token, m
           },
         });
         if (res.status === 200) {
+          
           const temp = await res.json();
+          console.log(temp);
           setmessages(temp);
         }
       } catch (error) {
@@ -40,7 +41,7 @@ function MesArr({ curuser, curContact, contacts, messages, setmessages, token, m
     return null;
   }
 
-  console.log(messages);
+  
   const reversedMessages = [...messages].reverse();
   const messageComponents = reversedMessages.map((message, index) => (
     <Message
