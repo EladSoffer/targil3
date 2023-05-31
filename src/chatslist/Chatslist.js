@@ -1,6 +1,6 @@
-import { useState,useEffect } from 'react';
+import { useState, useEffect } from 'react';
 
-function Chatslist({ iname, itime, iicon, iclass, contact, setcurContact,curContact, user, contacts,id }) {
+function Chatslist({ iname, itime, iicon, iclass, contact, setcurContact, curContact, user, contacts, id }) {
   const [isSelected, setIsSelected] = useState(false);
 
   function handleClick(event) {
@@ -14,12 +14,12 @@ function Chatslist({ iname, itime, iicon, iclass, contact, setcurContact,curCont
   function updateSelectedStatus() {
 
 
-    if(!curContact || !curContact.user || curContact.user.length === 0 ){
+    if (!curContact || !curContact.user || curContact.user.length === 0) {
       return null;
     }
 
     if (curContact.id === id) {
-    
+
       setIsSelected(true);
     } else {
       setIsSelected(false);
@@ -34,7 +34,7 @@ function Chatslist({ iname, itime, iicon, iclass, contact, setcurContact,curCont
   function isToday(timestamp) {
     const today = new Date();
     const providedDate = new Date(timestamp);
-  
+
     return (
       today.getDate() === providedDate.getDate() &&
       today.getMonth() === providedDate.getMonth() &&
@@ -45,24 +45,28 @@ function Chatslist({ iname, itime, iicon, iclass, contact, setcurContact,curCont
 
   return (
     <a
-    href="#"
-    className={`list-group-item list-group-item-action d-flex align-items-center contactss ${isSelected ? 'active' : ''}`}
-    onClick={handleClick}
-  >
-    <img src={contact.user.profilePic} className='curcontact'/>
-    
+      href="#"
+      className={`list-group-item list-group-item-action d-flex align-items-center contactss ${isSelected ? 'active' : ''}`}
+      onClick={handleClick}
+    >
+      <img src={contact.user.profilePic} className='curcontact' />
+
       <span className={`chatcontacts `}>{iname}</span>
       {contact.lastMessage && (
-        <div className='lastmss'>{contact.lastMessage.content}</div>
+        <div className='lastmss'>
+          {contact.lastMessage.content.length > 7
+            ? contact.lastMessage.content.slice(0, 7) + '...'
+            : contact.lastMessage.content}
+        </div>
       )}
       {contact.lastMessage && (
-        <span className='ml-auto'><time className='lastMTime'  dateTime="YYYY-MM-DDTHH:MM:SS">{isToday(contact.lastMessage.created)
+        <span className='ml-auto'><time className='lastMTime' dateTime="YYYY-MM-DDTHH:MM:SS">{isToday(contact.lastMessage.created)
           ? new Date(contact.lastMessage.created).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })
           : new Date(contact.lastMessage.created).toLocaleDateString()}</time></span>
       )}
 
-    
-  </a>
+
+    </a>
   );
 }
 
