@@ -8,7 +8,7 @@ function MesArr({ curuser, curContact, contacts, messages, setmessages, token, m
     if (!curuser || !curContact || !contacts || contacts.length === 0 || curContact.name === '' || !token) {
       return;
     }
-
+    console.log(curContact.id);
     const getChatsId = async () => {
       try {
         const res = await fetch(`http://localhost:5000/api/Chats/${curContact.id}/Messages`, {
