@@ -10,6 +10,8 @@ import MesArr from '../mesarr/MesArr';
 
 //YUVAL
 
+
+
 function Chat({ curuser, setcuruser, user, token }) {
   const [contacts, setcontacts] = useState([]);
   const [messages, setmessages] = useState([]);
@@ -24,6 +26,7 @@ function Chat({ curuser, setcuruser, user, token }) {
     });
 
     if (res.status === 401) {
+      console.log(token.token);
       // Handle the unauthorized response
     } else {
       const userData = await res.json(); // Parse the response JSON
@@ -73,6 +76,26 @@ function Chat({ curuser, setcuruser, user, token }) {
   }, [mesFlag])
 
 
+
+    const deleteContact = async () => {
+    const res = await fetch(`http://localhost:5000/api/Chats/${curContact.id}`, {
+          'method': 'delete', // send a post request
+          'headers': {
+            'authorization': `Bearer ${token.token}`, // Use backticks for string interpolation
+            'Content-Type': 'application/json', // the data (username/password) is in the form of a JSON object
+          },
+        })
+        if (res.status === 400) {
+        } else {
+          var temp = mesFlag;
+          temp = temp + 1;
+          setmesFlag(temp);
+          setcurContact(null);
+      }
+    }
+  
+
+
   // Initialize user state as an empty array
   return (
     <>
@@ -117,7 +140,9 @@ function Chat({ curuser, setcuruser, user, token }) {
               {curContact && curContact.user && curContact.user.profilePic && <span className="ml-2">{curContact.user.username}</span>}
               <div className="ml-auto">
                 {curContact && curContact.user && curContact.user.profilePic && (
-                  <button className="btn btn-danger btn-sm">Delete</button>
+
+                  <button className="btn btn-danger btn-sm" onClick={deleteContact}>Delete</button>
+
                 )}
               </div>
             </div>
