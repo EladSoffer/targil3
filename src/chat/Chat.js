@@ -24,6 +24,7 @@ function Chat({ curuser, setcuruser, user, token }) {
     });
 
     if (res.status === 401) {
+      console.log(token.token);
       // Handle the unauthorized response
     } else {
       const userData = await res.json(); // Parse the response JSON
