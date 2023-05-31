@@ -28,6 +28,7 @@ function Modal({ contacts, setcontacts, setcurContact, token }) {
         const newContact = await res.json(); // Call res.json() to parse the response
         console.log(newContact);
         temp.push(newContact);
+        
         setcontacts(temp);
         setcurContact(newContact);
         document.getElementById('newname').value = '';

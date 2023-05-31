@@ -10,9 +10,9 @@ function contactArr({ contacts, setcurContact,curContact, user }) {
     
     return null;
   }
- 
-  const contactComponents = contacts.map((contact, index) => (
 
+  const contactComponents = contacts.map((contact, index) => (
+    
     <Chatslist
       key={index}
       iname={contact.user.username} 
@@ -25,8 +25,7 @@ function contactArr({ contacts, setcurContact,curContact, user }) {
       user={user}
       contacts={contacts}
       id= {contact.id}
-    />
-    
+    />    
   ));
 
   return(

@@ -474,6 +474,9 @@ time[datetime] {
   float: right;
   font-size: 0.9vh !important;
 }
+.deletebtn{
+  float: right;
+}
 
 
 
