@@ -1,6 +1,6 @@
-# Ex1 part B
+# Ex2
 
-this is the second part of exercise 1 in Advanced Programming 2 course.
+this is the therd exercise in Advanced Programming 2 course.
 
 This is a simple chat application called 'Friends' built using React for real-time communication between users.<br /> The app allows users to register and create an account, log in, and start a conversation with other users that also have an acount.
 
@@ -31,6 +31,15 @@ you can press the add contact button and than add new conversation with new frie
 you can also switch conversations by pressing the person that you want to talk to(you can see that the friend who currently talk to be with blue background in the chats list).<br />
 you can logout by pressing the logout button at the top left screen corner .
 
+**using socket.io**
+in this exercise we use socket.io and therefore when one person add his friend, his friend will get a new contact.
+when one person send message to his friend he will get it and will see it alive.
+when one person delete his friend, the contact's frienf will refresh it.
+
+**using server**
+all the data save in database (mongodb), and therefore refreshing will not distarbe the data, and all the data will save.
+
+
 
 
 ##### How to run:
@@ -41,8 +50,10 @@ you can logout by pressing the logout button at the top left screen corner .
       
       c. Install the required dependencies by running 'npm install' in the root directory.
       
-      d. Run the app using 'npm start'.
+      d. Run the app using 'node app.js'.
       
       e.The app will open in your default browser at the login page, where you can register or log in to start chatting with your friends.
+     
       
 
+***have fun***
