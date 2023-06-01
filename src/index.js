@@ -19,10 +19,6 @@ const App = () => {
 
   useEffect(() => {
 
-    console.log("dd");
-    // Connect to the socket when the component mounts
-    socket.connect();
-
     // Connect to the socket when the component mounts
     socket.connect();
     socket.on('connect', () => {
