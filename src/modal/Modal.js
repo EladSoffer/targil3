@@ -41,7 +41,7 @@ socket.off('addedYou');
       } else {
         const temp = [...contacts];
         const newContact = await res.json(); // Call res.json() to parse the response
-        console.log(newContact);
+
         temp.push(newContact);
         setcontacts(temp);
         setcurContact(newContact);
