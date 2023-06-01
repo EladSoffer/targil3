@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { createRoot } from 'react-dom/client'; // Import from react-dom/client instead of react-dom
+
 import './index.css';
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import io from 'socket.io-client';
@@ -17,6 +18,7 @@ const App = () => {
   const [init, setinit] = useState(0);
 
   useEffect(() => {
+
     // Connect to the socket when the component mounts
     socket.connect();
     socket.on('connect', () => {
@@ -67,4 +69,6 @@ const App = () => {
 };
 
 const root = document.getElementById('root');
+
 createRoot(root).render(<App />); // Use createRoot from react-dom/client
+

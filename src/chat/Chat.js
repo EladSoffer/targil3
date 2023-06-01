@@ -8,28 +8,10 @@ import React, { useEffect, useState } from 'react';
 import MesArr from '../mesarr/MesArr';
 
 
-//YUVAL
-
-
-
 function Chat({ curuser, setcuruser, user, token, socket }) {
   const [contacts, setcontacts] = useState([]);
   const [messages, setmessages] = useState([]);
   const [mesFlag, setmesFlag] = useState(1);
-
-  useEffect(() => {
-    socket.on('chatDeleted', (chatId) => {
-      // Handle the chatDeleted event received from the server
-      console.log('Chat deleted:', chatId);
-      const updatedContacts = contacts.filter((contact) => contact.id !== chatId);
-      setcontacts(updatedContacts);
-    });
-
-    return () => {
-      socket.off('chatDeleted');
-    };
-  }, [socket, contacts]);
-
 
 
   useEffect(() => {
@@ -49,6 +31,20 @@ function Chat({ curuser, setcuruser, user, token, socket }) {
   }, [socket, contacts]);
 
 
+  useEffect(() =>  {
+       // Listen for the delete event from the server
+      socket.on('chatDeleted', (chatId) => {
+        const updatedContacts = contacts.filter((contact) => contact.id !== chatId)
+        setcontacts(updatedContacts);
+        if(curContact.id === chatId){
+          setcurContact(null);
+        }
+ });
+
+ return () => {
+  socket.off('chatDeleted');
+ } ;
+}, [socket, contacts]);
 
   const getCuruser = async () => {
     const res = await fetch(`http://localhost:5000/api/Users/${token.name}`, {
@@ -89,12 +85,11 @@ function Chat({ curuser, setcuruser, user, token, socket }) {
 
   const friendChat = async () => {
     const res = await fetch('http://localhost:5000/api/Chats', {
-      'method': 'Get', // send a post request
+      'method': 'Get', // send a get request
       'headers': {
         authorization: `Bearer ${token.token}`, // Use backticks for string interpolation
         'Content-Type': 'application/json', // the data (username/password) is in the form of a JSON object
       },
-
     })
     const data = await res.json(); // Parse the response JSON
     console.log(data);
@@ -153,7 +148,7 @@ function Chat({ curuser, setcuruser, user, token, socket }) {
                 <span className="ml-2">{curuser.displayName}</span>
                 <span className="ml-auto">
 
-                  <Modal contacts={contacts} setcontacts={setcontacts} setcurContact={setcurContact} token={token} />
+                  <Modal curuser={curuser} contacts={contacts} setcontacts={setcontacts} setcurContact={setcurContact} token={token} socket={socket} mesFlag={mesFlag} setmesFlag={setmesFlag}/>
 
                 </span>
               </div>

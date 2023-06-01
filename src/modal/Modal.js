@@ -1,9 +1,24 @@
 
 import Profile from '../images/profile.png';
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 
-function Modal({ contacts, setcontacts, setcurContact, token }) {
+function Modal({ curuser, contacts, setcontacts, setcurContact, token, socket, mesFlag, setmesFlag }) {
   const [error, setError] = useState(null);
+
+  useEffect(() =>  {
+    // Listen for the delete event from the server
+   socket.on('addedYou', (friendName) => {
+    if(friendName === curuser.name){
+        const temp = mesFlag + 1;
+        setmesFlag(temp);
+    }
+});
+
+return () => {
+socket.off('addedYou');
+} ;
+}, [socket, contacts]);
+
   function handleAddClick(event) {
 
     const inputEl = document.getElementById('newname');
@@ -28,7 +43,6 @@ function Modal({ contacts, setcontacts, setcurContact, token }) {
         const newContact = await res.json(); // Call res.json() to parse the response
 
         temp.push(newContact);
-        
         setcontacts(temp);
         setcurContact(newContact);
         document.getElementById('newname').value = '';
@@ -36,6 +50,7 @@ function Modal({ contacts, setcontacts, setcurContact, token }) {
         document.getElementById('exampleModal').classList.remove('show');
         document.body.classList.remove('modal-open');
         document.querySelector('.modal-backdrop').remove();
+        socket.emit('addChat', newContact.user.username);
       }
     }
     friends();
