@@ -12,10 +12,44 @@ import MesArr from '../mesarr/MesArr';
 
 
 
-function Chat({ curuser, setcuruser, user, token }) {
+function Chat({ curuser, setcuruser, user, token, socket }) {
   const [contacts, setcontacts] = useState([]);
   const [messages, setmessages] = useState([]);
   const [mesFlag, setmesFlag] = useState(1);
+
+  useEffect(() => {
+    socket.on('chatDeleted', (chatId) => {
+      // Handle the chatDeleted event received from the server
+      console.log('Chat deleted:', chatId);
+      const updatedContacts = contacts.filter((contact) => contact.id !== chatId);
+      setcontacts(updatedContacts);
+    });
+
+    return () => {
+      socket.off('chatDeleted');
+    };
+  }, [socket, contacts]);
+
+
+
+  useEffect(() => {
+    socket.on('MessageSent', (chatId) => {
+      const hasChat = contacts.some((contact) => contact.id === chatId);
+    
+    if (hasChat) {
+      var temp = mesFlag;
+      temp = temp + 1;
+      setmesFlag(temp);
+    }
+    });
+
+    return () => {
+      socket.off('MessageSent');
+    };
+  }, [socket, contacts]);
+
+
+
   const getCuruser = async () => {
     const res = await fetch(`http://localhost:5000/api/Users/${token.name}`, {
       method: 'GET', // Use 'GET' instead of 'Get'
@@ -63,6 +97,7 @@ function Chat({ curuser, setcuruser, user, token }) {
 
     })
     const data = await res.json(); // Parse the response JSON
+    console.log(data);
     setcontacts(data);
 
   }
@@ -77,23 +112,24 @@ function Chat({ curuser, setcuruser, user, token }) {
 
 
 
-    const deleteContact = async () => {
+  const deleteContact = async () => {
     const res = await fetch(`http://localhost:5000/api/Chats/${curContact.id}`, {
-          'method': 'delete', // send a post request
-          'headers': {
-            'authorization': `Bearer ${token.token}`, // Use backticks for string interpolation
-            'Content-Type': 'application/json', // the data (username/password) is in the form of a JSON object
-          },
-        })
-        if (res.status === 400) {
-        } else {
-          var temp = mesFlag;
-          temp = temp + 1;
-          setmesFlag(temp);
-          setcurContact(null);
-      }
+      'method': 'delete', // send a post request
+      'headers': {
+        'authorization': `Bearer ${token.token}`, // Use backticks for string interpolation
+        'Content-Type': 'application/json', // the data (username/password) is in the form of a JSON object
+      },
+    })
+    if (res.status === 400) {
+    } else {
+      var temp = mesFlag;
+      temp = temp + 1;
+      setmesFlag(temp);
+      setcurContact(null);
+      socket.emit('deleteChat', curContact.id);
     }
-  
+  }
+
 
 
   // Initialize user state as an empty array
@@ -151,7 +187,7 @@ function Chat({ curuser, setcuruser, user, token }) {
             <div className="input-group mt-auto ">
 
 
-              <Send curuser={curuser} setcuruser={setcuruser} curContact={curContact} token={token} messages={messages} setmessages={setmessages} mesFlag={mesFlag} setmesFlag={setmesFlag} />
+              <Send curuser={curuser} setcuruser={setcuruser} curContact={curContact} token={token} messages={messages} setmessages={setmessages} mesFlag={mesFlag} setmesFlag={setmesFlag} socket={socket} />
 
             </div>
           </div>

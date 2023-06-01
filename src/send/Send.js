@@ -1,7 +1,7 @@
 import React, { useState,useEffect } from 'react';
 
 
-function Message({curuser, setcuruser, curContact, setuser, token, messages, setmessages, mesFlag, setmesFlag}) {
+function Message({curuser, setcuruser, curContact, setuser, token, messages, setmessages, mesFlag, setmesFlag, socket}) {
 
 
   function sendMessage() {
@@ -35,6 +35,7 @@ function Message({curuser, setcuruser, curContact, setuser, token, messages, set
         var temp = mesFlag;
         temp = temp + 1;
         setmesFlag(temp);
+        socket.emit('sendMessage', curContact.id,mes);
         // const temp = [...messages];
         // temp.push(messageWithTime);
         // setmessages(temp);
