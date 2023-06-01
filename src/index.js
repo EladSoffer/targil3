@@ -22,7 +22,6 @@ const App = () => {
     // Connect to the socket when the component mounts
     socket.connect();
     socket.on('connect', () => {
-      console.log("MY SOCKET: " + socket.id);
     });
 
     // Clean up the socket connection when the component unmounts

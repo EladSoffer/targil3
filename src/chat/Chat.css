@@ -427,7 +427,7 @@ time[datetime] {
 
 
 .message-container {
-  max-height: calc(69vh - 100px); /* Adjusted value based on viewport height */
+  max-height: 80%; /* Adjusted value based on viewport height */
   overflow-y: scroll;
 }
 
