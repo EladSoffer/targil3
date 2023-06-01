@@ -21,7 +21,6 @@ function MesArr({ curuser, curContact, contacts, messages, setmessages, token, m
         if (res.status === 200) {
           
           const temp = await res.json();
-          console.log(temp);
           setmessages(temp);
         }
       } catch (error) {

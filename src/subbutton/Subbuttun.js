@@ -14,7 +14,7 @@ function Subbutton(props) {
     const form = event.target.form;
     if (form.checkValidity()) { // Check if all required inputs are filled
 
-      const passwordRegex = /^(?=.*[A-Z]).{1,}$/; // Regular expression to match a password with at least one capital letter and a length of at least 8 characters
+      const passwordRegex = /^(?=.*[A-Z]).{8,}$/; // Regular expression to match a password with at least one capital letter and a length of at least 8 characters
       const passwordInput = document.getElementById('password');
       const confirmPasswordInput = document.getElementById('confirm-password');
       const displayNameInput = document.getElementById('display-name');
