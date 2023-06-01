@@ -427,8 +427,14 @@ time[datetime] {
 
 
 .message-container {
-  max-height: calc(69vh - 100px); /* Adjusted value based on viewport height */
+  max-height: 80%; /* Adjusted value based on viewport height */
   overflow-y: scroll;
+}
+
+.contacts-container {
+  max-height: calc(69vh - 66px); /* Adjusted value based on viewport height */
+  overflow-y: scroll;
+  overflow-x: hidden;
 }
 
 
@@ -462,6 +468,14 @@ time[datetime] {
   margin-left: 15px;
   margin-top: 20px;
  
+}
+
+.lastMTime {
+  float: right;
+  font-size: 0.9vh !important;
+}
+.deletebtn{
+  float: right;
 }
 
 

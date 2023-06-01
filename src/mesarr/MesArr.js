@@ -1,39 +1,55 @@
 import Message from "../message/Message";
 import React, { useRef, useEffect } from 'react';
 
-
-function MesArr({ curuser, curContact }) {
+function MesArr({ curuser, curContact, contacts, messages, setmessages, token, mesFlag}) {
   const containerRef = useRef(null);
 
   useEffect(() => {
-    if ((!curuser || !curuser.contacts || curuser.contacts.length === 0) || !curContact || curContact.name === '') {
+    if (!curuser || !curContact || !contacts || contacts.length === 0 || curContact.name === '' || !token) {
       return;
     }
 
+    const getChatsId = async () => {
+      try {
+        const res = await fetch(`http://localhost:5000/api/Chats/${curContact.id}/Messages`, {
+          method: 'GET',
+          headers: {
+            authorization: `Bearer ${token.token}`,
+            'Content-Type': 'application/json',
+          },
+        });
+        if (res.status === 200) {
+          
+          const temp = await res.json();
+          setmessages(temp);
+        }
+      } catch (error) {
+        console.error('Error fetching chat messages:', error);
+      }
+    };
+
+    getChatsId();
+  }, [token, curContact, mesFlag]);
+
+  useEffect(() => {
     if (containerRef.current) {
       containerRef.current.scrollTop = containerRef.current.scrollHeight;
     }
-  }, [curuser, curContact]);
+  }, [messages]);
 
-  if ((!curuser || !curuser.contacts || curuser.contacts.length === 0)) {
+  if (!curuser || !curuser.name || !curContact || curContact.name === '') {
     return null;
   }
 
-  if (!curContact || curContact.name === '') {
-    return null;
-  }
-
-
-  const contact = curuser.contacts.find(c => c.name === curContact.name);
-
-
-  const messageComponents = contact.messages.map((message, index) => (
+  
+  const reversedMessages = [...messages].reverse();
+  const messageComponents = reversedMessages.map((message, index) => (
     <Message
       key={index}
-      side="user-ms ml-84"
+      side={`message ${message.sender.username === curuser.name ? 'user-ms ml-84' : 'friend-ms ml-auto'}`}
       content={message.content}
-      time={message.time}
-      color="rgba(26, 6, 241, 0.575)"
+      time={message.created}
+      color={message.sender.username === curuser.name ? 'rgba(26, 6, 241, 0.575)' : 'rgba(26, 241, 6, 0.668)'}
     />
   ));
 

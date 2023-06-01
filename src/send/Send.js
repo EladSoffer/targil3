@@ -1,7 +1,7 @@
 import React, { useState,useEffect } from 'react';
 
 
-function Message({curuser, setcuruser, curContact, setuser}) {
+function Message({curuser, setcuruser, curContact, setuser, token, messages, setmessages, mesFlag, setmesFlag, socket}) {
 
 
   function sendMessage() {
@@ -16,19 +16,33 @@ function Message({curuser, setcuruser, curContact, setuser}) {
       time: time
     };
     
-    const userMes = {...curuser};
 
-    setcuruser(userMes);
-    // Find the contact by name
-
-    if (!(!curuser || !curuser.contacts || curuser.contacts.length === 0)) { 
-    const contact = userMes.contacts.find(c => c.name === curContact.name);
-    if (contact) {      
-        contact.messages = contact.messages ? [...contact.messages, messageWithTime] : [messageWithTime];
+    async function friends() {
+      const data = {
+        "msg": mes
+      }
+      const res = await fetch(`http://localhost:5000/api/Chats/${curContact.id}/Messages`, {
+        'method': 'post', // send a post request
+        'headers': {
+          'authorization': `Bearer ${token.token}`, // Use backticks for string interpolation
+          'Content-Type': 'application/json', // the data (username/password) is in the form of a JSON object
+        },
+        'body': JSON.stringify(data) // The actual data (username/password)
+      })
+      if (res.status === 500) {
+        // setError('Contact ID does not match any user.');
+      } else {
+        var temp = mesFlag;
+        temp = temp + 1;
+        setmesFlag(temp);
+        socket.emit('sendMessage', curContact.id,mes);
+        // const temp = [...messages];
+        // temp.push(messageWithTime);
+        // setmessages(temp);
       }
     }
-    //userMes.contactsmessages 
-    setcuruser(userMes);
+    friends();
+    // Find the contact by name
     mesa.value = ""; 
   }
   function handleKeyDown(event) {

@@ -1,18 +1,25 @@
-import { useState,useEffect } from 'react';
+import { useState, useEffect } from 'react';
 
-function Chatslist({ iname, itime, iicon, iclass, curuser, setcuruser, setcurContact,curContact, user }) {
+function Chatslist({ iname, itime, iicon, iclass, contact, setcurContact, curContact, user, contacts, id }) {
   const [isSelected, setIsSelected] = useState(false);
 
   function handleClick(event) {
     event.preventDefault();
-    const temp = user.find(usera => usera.name === iname);
+    const temp = contacts.find(usera => usera.id === id);
     setcurContact(temp);
     setIsSelected(true);
   }
 
   // Update isSelected state of other components
   function updateSelectedStatus() {
-    if (curContact.name === iname) {
+
+
+    if (!curContact || !curContact.user || curContact.user.length === 0) {
+      return null;
+    }
+
+    if (curContact.id === id) {
+
       setIsSelected(true);
     } else {
       setIsSelected(false);
@@ -24,29 +31,42 @@ function Chatslist({ iname, itime, iicon, iclass, curuser, setcuruser, setcurCon
     updateSelectedStatus();
   }, [curContact]);
 
-  const tempUs = user.find(usera => usera.name === iname);
-  const print = curuser.contacts.find(i => i.name == iname);
-  const lastMessage = print.messages[print.messages.length - 1];
+  function isToday(timestamp) {
+    const today = new Date();
+    const providedDate = new Date(timestamp);
+
+    return (
+      today.getDate() === providedDate.getDate() &&
+      today.getMonth() === providedDate.getMonth() &&
+      today.getFullYear() === providedDate.getFullYear()
+    );
+  }
 
 
   return (
     <a
-    href="#"
-    className={`list-group-item list-group-item-action d-flex align-items-center contactss ${isSelected ? 'active' : ''}`}
-    onClick={handleClick}
-  >
-    <img src={tempUs.picture} className='curcontact'/>
-    
+      href="#"
+      className={`list-group-item list-group-item-action d-flex align-items-center contactss ${isSelected ? 'active' : ''}`}
+      onClick={handleClick}
+    >
+      <img src={contact.user.profilePic} className='curcontact' />
+
       <span className={`chatcontacts `}>{iname}</span>
-      {lastMessage && (
-        <div className='lastmss'>{lastMessage.content}</div>
+      {contact.lastMessage && (
+        <div className='lastmss'>
+          {contact.lastMessage.content.length > 7
+            ? contact.lastMessage.content.slice(0, 7) + '...'
+            : contact.lastMessage.content}
+        </div>
       )}
-      {lastMessage && (
-        <span className='ml-auto'><time  dateTime="YYYY-MM-DDTHH:MM:SS">{lastMessage.time}</time></span>
+      {contact.lastMessage && (
+        <span className='ml-auto'><time className='lastMTime' dateTime="YYYY-MM-DDTHH:MM:SS">{isToday(contact.lastMessage.created)
+          ? new Date(contact.lastMessage.created).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })
+          : new Date(contact.lastMessage.created).toLocaleDateString()}</time></span>
       )}
 
-    
-  </a>
+
+    </a>
   );
 }
 

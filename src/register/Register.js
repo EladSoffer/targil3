@@ -5,14 +5,10 @@ import Imageinput from '../imageinput/Imageinput';
 import { Link } from 'react-router-dom';
 import React, { useState } from 'react';
 
-function Register({setUser,user, init}) {
+function Register({setUser,user}) {
 
   const [image, setimage] = useState({})
-  if (init === 0) {
-    // Redirect to home page if curuser is not available
-    window.location.href = '/';
-    return null;
-  }
+
   return (
     <>
     <title>Friends Registration</title>
@@ -40,7 +36,8 @@ function Register({setUser,user, init}) {
 
               <div className="row">
                 <div className="ol-6 mx-auto text-center">
-                  <img                 
+                  <img    
+                    alt=''            
                     id="friendspic"                  
                     className="img-responsive center-block"
                   />
