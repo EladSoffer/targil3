@@ -30,17 +30,17 @@ To log out, users can click the "Logout" button located at the top-left corner o
 
 
 
-##### How to run:
+## How to Run
 
-      a.Clone the repository.
-      
-      b.Open a terminal and navigate to the root directory of the project.
-      
-      c. Install the required dependencies by running 'npm install' in the root directory.
-      
-      d. Run the app using 'node app.js'.
-      
-      e.Open any browser and navigate to [http://localhost:5000](http://localhost:5000), where you can register or log in to start chatting with your friends.
+1. Clone the repository.
+
+2. Open a terminal and navigate to the root directory of the project.
+
+3. Install the required dependencies by running the command `npm install` in the root directory.
+
+4. Run the app using `node app.js`.
+
+5. Open any browser and navigate to [http://localhost:5000](http://localhost:5000), where you can register or log in to start chatting with your friends.
       
 
 ## Database
