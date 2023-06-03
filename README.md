@@ -43,11 +43,11 @@ To log out, users can click the "Logout" button located at the top-left corner o
       e.Open any browser at http://localhost:5000, where you can register or log in to start chatting with your friends.
       
 
-**Database**
+## Database
 
 Friends uses MongoDB as its database to store user information and chat data. Make sure you have MongoDB installed on your system and running before starting the application. 
 
-## MongoDB Setup
+**MongoDB Setup**
 
 To use MongoDB with the Friends chat application, please follow these steps to set up your MongoDB database:
 
