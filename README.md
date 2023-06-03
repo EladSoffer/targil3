@@ -54,9 +54,10 @@ To use MongoDB with the Friends chat application, please follow these steps to s
       a. Install MongoDB: Visit the [MongoDB website](https://www.mongodb.com/) and download the latest version of MongoDB for your operating system. Follow the installation instructions provided for your specific operating system.
       
       b.Start MongoDB: Once MongoDB is installed, you need to start the MongoDB service. The process for starting the service may vary depending on your operating system. Here are a few common commands:
-      **Windows**: Open a command prompt as an administrator and run the following command:
-            ```bash
-              mongod
+     **Windows**: Open a command prompt as an administrator and run the following command:
+
+```bash
+mongod
       
       
 
