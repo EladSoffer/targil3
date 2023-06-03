@@ -55,9 +55,9 @@ To use MongoDB with the Friends chat application, please follow these steps to s
 
 2. Start MongoDB: Once MongoDB is installed, you need to start the MongoDB service. The process for starting the service may vary depending on your operating system. Here are a few common commands:
 
-   - Windows: Open a command prompt as an administrator and run the following command:
+   - Windows: Open a command prompt as an administrator and run the following command:<br />
       mongod<br />
-   - Mac/Linux: Open a terminal and run the following command:
+   - Mac/Linux: Open a terminal and run the following command:<br />
       sudo service mongod start<br />
    
 
