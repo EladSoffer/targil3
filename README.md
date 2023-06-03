@@ -1,4 +1,4 @@
-# Ex1 part B
+# Ex2
 
 this is  exercise 2 in Advanced Programming 2 course.
 
@@ -55,9 +55,8 @@ To use MongoDB with the Friends chat application, please follow these steps to s
       
       b.Start MongoDB: Once MongoDB is installed, you need to start the MongoDB service. The process for starting the service may vary depending on your operating system. Here are a few common commands:
       **Windows**: Open a command prompt as an administrator and run the following command:
-
-```bash
-mongod
+            ```bash
+              mongod
       
       
 
