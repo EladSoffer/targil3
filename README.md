@@ -60,6 +60,8 @@ To use MongoDB with the Friends chat application, please follow these steps to s
 ```bash
 mongod
 
+ - **Mac/Linux**: Open a terminal and run the following command:
+
 
       
       
