@@ -40,7 +40,7 @@ To log out, users can click the "Logout" button located at the top-left corner o
       
       d. Run the app using 'node app.js'.
       
-      e.Open any browser at http://localhost:5000, where you can register or log in to start chatting with your friends.
+      e.Open any browser and navigate to [http://localhost:5000](http://localhost:5000), where you can register or log in to start chatting with your friends.
       
 
 ## Database
