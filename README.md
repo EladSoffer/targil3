@@ -51,13 +51,16 @@ Friends uses MongoDB as its database to store user information and chat data. Ma
 
 To use MongoDB with the Friends chat application, please follow these steps to set up your MongoDB database:
 
-      a. Install MongoDB: Visit the [MongoDB website](https://www.mongodb.com/) and download the latest version of MongoDB for your operating system. Follow the installation instructions provided for your specific operating system.
-      
-      b.Start MongoDB: Once MongoDB is installed, you need to start the MongoDB service. The process for starting the service may vary depending on your operating system. Here are a few common commands:
-     **Windows**: Open a command prompt as an administrator and run the following command:
+1. **Install MongoDB**: Visit the MongoDB website and download the latest version of MongoDB for your operating system. Follow the installation instructions provided for your specific operating system.
 
+2. **Start MongoDB**: Once MongoDB is installed, you need to start the MongoDB service. The process for starting the service may vary depending on your operating system. Here are a few common commands:
+
+   - **Windows**: Open a command prompt as an administrator and run the following command:
+   
 ```bash
 mongod
+
+
       
       
 
