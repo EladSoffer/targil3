@@ -13,7 +13,7 @@ app.use(express.json({ limit: '1000mb' }));
 const server = http.createServer(app);
 const io = socketIO(server,{
   cors: {
-    origin: 'http://localhost:3000'
+    origin: ['http://localhost:3000', 'http://localhost:5000'] 
   }
 });
 
